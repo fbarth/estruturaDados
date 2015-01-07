@@ -1,0 +1,6 @@
+        public boolean isEmpty(){
+		if(prim == null)
+			return true;
+		else
+			return false;
+	}

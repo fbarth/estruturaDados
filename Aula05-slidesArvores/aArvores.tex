@@ -1,0 +1,462 @@
+\documentclass[landscape,pdftex]{jomislides}
+
+\slidesmag{5} % escala, qto maior maiores serão as letras/figras/etc.
+
+%\centerslidesfalse
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{algorithmic}
+\usepackage{babel}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{alltt,fancyvrb,amssymb}
+\usepackage{listings}
+\usepackage{float,ctable}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+%
+% Slides
+% ======
+%
+
+\begin{document}
+
+%\input{autorHeaders}
+
+\title{Árvores} 
+\author{Fabrício J. Barth}
+\institution{BandTec - Faculdade de Tecnologia Bandeirantes}
+\date{Setembro de 2011}
+
+\SlideHeader{}
+            {Disciplina de Estrutura de Dados e Armazenamento}
+\SlideFooter{\theslidepartheading $\;$ --- $\;$ \theslideheading}
+            {Faculdade de Tecnologia Bandeirantes \theslide}
+
+\vpagecolor[white]{white}
+\subtitle{}
+\maketitle
+
+\begin{Slide}{Tópicos}
+  \begin{itemize}
+  \item Introdução
+  \item Árvores binárias
+\begin{itemize}
+\item Implementação em Java
+\item Ordens de percurso em árvores binárias
+\item Altura de uma árvore
+\end{itemize}
+  \item Árvores com número váriavel de filhos
+\begin{itemize}
+\item Implementação em Java 
+\item Altura de uma árvore
+\item Topologia
+\end{itemize}
+  \end{itemize}
+\end{Slide}
+
+\begin{Slide}{Introdução - Árvore}
+Um conjunto de nós tal que:  
+\begin{itemize}
+  \item existe um nó $r$, denominado \emph{raiz}, com zero ou mais
+    sub-árvores, cujas raízes estão ligadas a $r$.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{figuras/fig01.pdf}
+\end{center}
+
+\newpage
+
+  \item os nós raízes destas sub-árvores são os \emph{filhos} de $r$.
+  \item os \emph{nós internos} da árvore são os nós com filhos.
+  \item as \emph{folhas} ou \emph{nós externos} da árvore são os nós
+    sem filhos. 
+  \end{itemize}
+\end{Slide}
+
+\begin{Slide}{Árvores Binárias}
+\begin{itemize}
+\item uma árvore em que cada nodo tem zero, um ou dois filhos.
+\item uma árvore binária é:
+\begin{itemize}
+\item uma árvore vazia, ou; 
+\item um nodo raiz com duas sub-árvores: a sub-árvore da direita
+  (sad); a sub-árvore da esquerda (sae).
+\end{itemize}
+\end{itemize}
+\begin{center}
+    \includegraphics[width=1\textwidth]{figuras/fig02.pdf}
+\end{center}
+\end{Slide}
+
+
+\begin{Slide}{Árvores Binárias - Exemplo}
+Árvore binária representando expressões aritméticas:
+\begin{itemize}
+\item nós folhas representam operandos
+\item nós internos operadores
+\item exemplo: $(3+6) \times (4-1)+5$
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=3cm},
+  level 2/.style={sibling distance=3cm},
+  level 3/.style={sibling distance=1.5cm}]
+  \node {$+$}
+    child {node {$\times$}
+      child {node {$+$}
+        child {node{$3$}}
+        child {node{$6$}}
+      }
+      child {node {$-$}
+        child {node{$4$}}
+        child {node{$1$}}
+      }
+    }
+    child {node {$5$}};
+\end{tikzpicture}
+\end{center}
+\end{Slide}
+
+\begin{Slide}{Árvores binárias - implementação}
+\begin{itemize}
+\item A representação de uma árvore é feita através de uma referência
+  para o nodo raiz da árvore.
+\item Representação de um nodo da árvore:
+\end{itemize}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Nodo.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Interface do tipo Árvore}
+\begin{itemize}
+\item Nodo criaSemFilhos(char c)
+\item Nodo criaComFilhos(char c, Nodo esq, Nodo dir)
+\item boolean vazia(Nodo n)
+\item boolean pertence(char c, Nodo n)
+\item void imprime(Nodo n)
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Árvores Binárias - implementação}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ArvoreBinaria.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Árvores Binárias - implementação}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ArvoreBinaria2.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Árvores Binárias - implementação}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ArvoreBinaria4.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Árvores Binárias - implementação}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ArvoreBinaria5.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Árvores Binárias - implementação}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ArvoreBinaria6.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Árvores Binárias - exemplo de uso}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/MainBi.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Ordens de percurso em árvores binárias}
+\begin{figure}[H]
+\center
+\tiny
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ArvoreBinaria7.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Exemplos concretos do uso de árvores}
+\begin{itemize}
+\item Estrutura de diretórios e arquivos de um sistema operacional
+\item Análise semântica de equações matemáticas
+\item \textit{É uma estrutura usada por vários outros algoritmos...}
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Altura de árvore binárias}
+\begin{itemize}
+\item Propriedade fundamental de árvores: só existe um caminho da raiz
+  para qualquer nó.
+\item Altura de uma árvore: comprimento do caminho mais longo da raiz
+  até uma das folhas.
+\begin{itemize}
+\item a altura de uma árvore com um único nó raiz é zero
+\item a altura de uma árvore vazia é -1
+\end{itemize}
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Altura de árvore binárias}
+\begin{itemize}
+\item Nível de um nó:
+\begin{itemize}
+\item a raiz está no nível 0, seus filhos diretos estão no nível 1, ...
+\item o último nível da árvore é a altura da árvore.
+\end{itemize}
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Altura de árvore binárias}
+\begin{itemize}
+\item Árvore cheia:
+\begin{itemize}
+\item todos os seus nós internos tem duas sub-árvores associadas. 
+\item número $n$ de nós de uma árvore cheia de altura $h$ é igual a
+\begin{equation}
+n = s^{k+1} - 1
+\end{equation}
+\end{itemize}
+\end{itemize}
+\begin{figure}[htbp]
+\centering 
+\resizebox*{0.8\columnwidth}{0.4\textheight}
+{\includegraphics{figuras/fig03.pdf}}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Altura de árvore binárias}
+\begin{itemize}
+\item Árvore degenerada:
+\begin{itemize}
+\item todos os seus nós internos tem uma única sub-árvore associada. 
+\item número $n$ de nós de uma árvore cheia de altura $h$ é igual a
+\begin{equation}
+n = h + 1
+\end{equation}
+\end{itemize}
+\end{itemize}
+\begin{figure}[htbp]
+\centering 
+\resizebox*{0.8\columnwidth}{0.4\textheight}
+{\includegraphics{figuras/fig04.pdf}}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Árvores com número variável de filhos}
+Cada nó pode ter mais que duas sub-árvores associadas.
+\begin{center}
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=3.0cm},
+  level 2/.style={sibling distance=3.0cm},
+  level 3/.style={sibling distance=2.0cm}]
+  \node {$c:/$}
+    child {node {$arquivos/$}
+      child {node {$program/$}
+        child {node{$aqr1.exe$}}
+        child {node{$arq2.exe$}}
+        child {node{$arq3.exe$}}
+      }
+      child {node {$usuarios/$}
+      }
+    }
+    child {node {$temp.txt$}
+    };
+\end{tikzpicture}
+\end{center}
+\end{Slide}
+
+
+\begin{Slide}{Árvores com até 3 nós}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Nodo3.java}
+\end{figure}
+\begin{figure}[htbp]
+\centering 
+\resizebox*{0.4\columnwidth}{0.4\textheight}
+{\includegraphics{figuras/fig05.pdf}}
+\end{figure}
+\end{Slide}
+
+
+\begin{Slide}{Procurando por um elemento}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Pertence.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Árvores com até $N$ nós fixos}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/NodoN.java}
+\end{figure}
+\end{Slide}
+
+
+\begin{Slide}{Representação de árvore com número variável de filhos}
+\begin{figure}[htbp]
+\centering 
+\resizebox*{0.8\columnwidth}{0.8\textheight}
+{\includegraphics{figuras/fig06.pdf}}
+\end{figure}
+
+\end{Slide}
+
+
+\begin{Slide}{Funções de uma árvore n-ária}
+\begin{itemize}
+\item Nodo create(char c)
+\item void insert(Nodo a, Nodo sub\_a)
+\item void print(Nodo a)
+\item boolean search(Nodo n, char c)
+\item int getAltura(Nodo n)
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Nodo de uma árvore n-ária}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/NodoNs.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Criação de nodos em uma árvore n-ária}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/CreateNs.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Inserção em uma árvore n-ária}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/InsertNs.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Impressão de uma árvore n-ária}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/PrintNs.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Busca em uma árvore n-ária}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/SearchNs.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Atributos de uma árvore n-ária}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/GetAlturaNs.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Exemplo de construção e utilização de uma árvore n-ária}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ExemploArvoreNs1.java}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ExemploArvoreNs2.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Topologia Binária}
+\begin{itemize}
+\item Representação de um nodo de uma árvore n-ária $\equiv$
+  representação de um nodo de uma árvore binária. 
+\item Um nodo possui a informação que deve ser armazenada e duas
+  referências para sub-árvores:
+\begin{itemize}
+\item árvore binária: referências para as sub-árvores à esquerda e à direita. 
+\item árvore n-ária: referências para a primeira sub-árvore filha e
+  para a sub-árvore irmã. 
+\end{itemize}
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Resumo}
+\begin{itemize}
+\item Árvore \emph{binária}. 
+\item Árvore com \emph{número variável de filhos} ($n$-ária).
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Material de \textbf{consulta} e \textbf{referência}}
+  \begin{itemize}
+  \item Capítulo 13 do livro: ``Introdução a Estruturas de Dados'' do
+    Waldemar Celes, Renato Cerqueira e José Lucas Rangel.
+  \item Imagens retiradas do site da disciplina de Programação II da
+    PUC do Rio de Janeiro
+    \href{http://www.inf.puc-rio.br/~inf1007/}{http://www.inf.puc-rio.br/~inf1007/}. 
+  \end{itemize}
+\end{Slide}
+
+\end{document}
+

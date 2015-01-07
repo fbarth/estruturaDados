@@ -1,0 +1,4 @@
+class Nodo {
+	private int info;
+	private Nodo prox;
+}

@@ -1,0 +1,252 @@
+\documentclass[landscape,pdftex]{jomislides}
+
+\slidesmag{5} % escala, qto maior maiores serão as letras/figras/etc.
+
+%\centerslidesfalse
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{algorithmic}
+\usepackage{babel}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{alltt,fancyvrb,amssymb}
+\usepackage{listings}
+\usepackage{float,ctable}
+\usepackage{hyperref}
+
+%
+% Slides
+% ======
+%
+
+\begin{document}
+
+%\input{autorHeaders}
+
+\title{Filas} 
+\author{Fabrício J. Barth}
+\institution{BandTec - Faculdade de Tecnologia Bandeirantes}
+\date{Março de 2011}
+
+\SlideHeader{}
+            {Disciplina de Estrutura de Dados e Armazenamento}
+\SlideFooter{\theslidepartheading $\;$ --- $\;$ \theslideheading}
+            {Faculdade de Tecnologia Bandeirantes \theslide}
+
+\vpagecolor[white]{white}
+\subtitle{}
+\maketitle
+
+\begin{Slide}{Tópicos Principais}
+  \begin{itemize}
+  \item Introdução
+  \item Interface do tipo fila
+  \item Implementação de fila com vetor
+  \item Implementação de fila com lista encadeada
+  \end{itemize}
+\end{Slide}
+
+\begin{Slide}{Introdução - Fila}
+  \begin{itemize}
+  \item A estrutura de fila é uma analogia natural com o conceito de
+    fila que usamos no nosso dia-a-dia: quem primeiro entra numa fila
+    é o primeiro a ser atendido (a sair da fila).
+  \item Sua ideia fundamental é que só podemos inserir um novo
+    elemento no final da fila e só podemos retirar o elemento do
+    início.   
+  \end{itemize}
+\end{Slide}
+
+\begin{Slide}{Interface do tipo Fila}
+\emph{public interface Fila}
+\begin{itemize}
+\item \emph{cria()} : cria uma estrutura de fila (em linguagens
+  O.O. isto pode ser feito no construtor da classe);
+\item \emph{inseri(v)}: inseri um elemento no fim da lista;
+\item \emph{retira()}: retira um elemento no início da lista;
+\item \emph{vazia()}: informa se a fila está ou não vazia;
+\item \emph{libera()}: destrói a fila, liberando toda a memória usada
+  pela estrutura.
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Interface do tipo Fila}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/InterfaceFila.java}
+\end{figure}
+\end{Slide}
+
+
+\begin{Slide}{Implementação de fila com vetor}
+
+\begin{itemize}
+\item Utiliza uma estrutura finita de tamanho $N$.
+\item O processo de inserção e remoção em extremidades opostos fará a
+  fila \emph{andar} no vetor.
+\end{itemize}
+
+\newpage
+
+Fila após inserção de quatro novos elementos
+
+\begin{center}
+    \includegraphics[width=1\textwidth]{figuras/fig01.pdf}
+\end{center}
+
+\newpage
+
+Fila após retirar dois elementos
+
+\begin{center}
+    \includegraphics[width=1\textwidth]{figuras/fig02.pdf}
+\end{center}
+
+\newpage
+
+Fila com incremento circular
+
+\begin{center}
+    \includegraphics[width=1\textwidth]{figuras/fig03.pdf}
+\end{center}
+\end{Slide}
+
+\begin{Slide}{Incremento circular}
+Para esta implementação, os índices do vetor são incrementados de
+maneira que seus valores progridam ``circularmente''.
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/IncrementoCircular.java}
+\end{figure}
+
+\newpage
+
+Essa mesma função pode ser implementada de uma forma mais compacta,
+por meio de um operador módulo (que retorna o resto de uma divisão):
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/IncrementoCircular2.java}
+\end{figure}
+
+\newpage
+
+Com o uso do operador módulo, em geral optamos por dispensar a função
+auxiliar e escrever diretamente o incremento circular:
+
+\begin{eqnarray}
+i = (i + 1) \% N; \nonumber
+\end{eqnarray}
+
+\end{Slide}
+
+\begin{Slide}{Implementação de fila com vetor}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/DeclaracaoFilaVetor.java}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/CriaVaziaLiberaFilaVetor.java}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/InseriFilaVetor.java}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/RemoveFilaVetor.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Implementação de fila com lista}
+
+\begin{itemize}
+\item Deve utilizar dois objetos que apontam um para o início da lista
+  e o outro para o fim.
+\end{itemize}
+
+\begin{center}
+    \includegraphics[width=1\textwidth]{figuras/fig04.pdf}
+\end{center}
+\end{Slide}
+
+\begin{Slide}{Implementação de fila com lista}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/DeclaracaoFilaLista.java}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/CriaVaziaLiberaFilaLista.java}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/InseriFilaLista.java}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/RemoveFilaLista.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Exemplo de uso}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ExemploUsoFila.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Material de \textbf{consulta} e \textbf{referência}}
+  \begin{itemize}
+  \item Capítulo 12 do livro: ``Introdução a Estruturas de Dados'' do
+    Waldemar Celes, Renato Cerqueira e José Lucas Rangel.
+  \end{itemize}
+\end{Slide}
+
+\end{document}
+

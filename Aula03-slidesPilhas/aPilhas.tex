@@ -1,0 +1,243 @@
+\documentclass[landscape,pdftex]{jomislides}
+
+\slidesmag{5} % escala, qto maior maiores serão as letras/figras/etc.
+
+%\centerslidesfalse
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{algorithmic}
+\usepackage{babel}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{alltt,fancyvrb,amssymb}
+\usepackage{listings}
+\usepackage{float,ctable}
+\usepackage{hyperref}
+
+%
+% Slides
+% ======
+%
+
+\begin{document}
+
+%\input{autorHeaders}
+
+\title{Pilhas} 
+\author{Fabrício J. Barth}
+\institution{BandTec - Faculdade de Tecnologia Bandeirantes}
+\date{Setembro de 2011}
+
+\SlideHeader{}
+            {Disciplina de Estrutura de Dados e Armazenamento}
+\SlideFooter{\theslidepartheading $\;$ --- $\;$ \theslideheading}
+            {Faculdade de Tecnologia Bandeirantes \theslide}
+
+\vpagecolor[white]{white}
+\subtitle{}
+\maketitle
+
+\begin{Slide}{Tópicos Principais}
+  \begin{itemize}
+  \item Introdução
+  \item Interface do tipo pilha
+  \item Exemplo de uso: verificação de expressões
+  \item Implementação de pilha com lista encadeada
+  \end{itemize}
+\end{Slide}
+
+\begin{Slide}{Introdução - Pilha}
+  \begin{itemize}
+  \item novo elemento é inserido no topo e acesso é apenas ao topo
+    \begin{itemize}
+      \item o primeiro que sai é o último que entrou (LIFO -
+        \textit{last in, first out}) 
+    \end{itemize}
+   \item operações básicas:
+
+\begin{itemize}
+\item empilhar (\textit{push}) um novo elemento, inserindo-o no topo
+\item desempilhar (\textit{pop}) um elemento, removendo-o do topo
+\end{itemize}  
+  \end{itemize}
+\end{Slide}
+
+\begin{Slide}{Introdução - Pilha}
+  \begin{center}
+    \includegraphics[width=1\textwidth]{figuras/fig1.pdf}
+  \end{center}
+\end{Slide}
+
+
+\begin{Slide}{Interface do tipo Pilha}
+\emph{public interface Pilha}
+\begin{itemize}
+\item \emph{cria()} : aloca dinâmicamente a estrutura da pilha;
+  inicializa seus campos e retorna seu objeto 
+\item \emph{push(v)} e \emph{pop()}: inserem e retiram,
+  respectivamente um valor na pilha
+\item \emph{vazia()}: informa se a pilha está ou não vazia
+\item \emph{libera()}: destrói a pilha, liberando toda a memória usada
+  pela estrutura.
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Interface do tipo pilha}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/InterfacePilha.java}
+\end{figure}
+\end{Slide}
+
+
+\begin{Slide}{Implementação de pilha com vetor}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/PilhaVetor1.java}
+\end{figure}
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/PilhaVetor1_1.java}
+\end{figure}
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/PilhaVetor2.java}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/PilhaVetor2_2.java}
+\end{figure}
+
+\end{Slide}
+
+
+\begin{Slide}{Exemplo de uso}
+\begin{itemize}
+\item Verificação de expressões matemáticas
+
+\begin{itemize}
+\item Considerando cadeias de caracteres com expressões matemáticas
+  que podem conter termos entre parênteses, colchetes ou chaves, ou
+  seja, entre os caracteres $($ e $)$, ou $[$ e $]$, ou $\{$ e $\}$;
+\item função que retorna $1$, se os parênteses, colchetes e chaves de
+  uma expressão aritmética $exp$ são abertos e fechados corretamente,
+  ou $0$ caso contrário;
+
+\newpage
+
+\item Para a expressão $2*\{3+4*(2+5[2+3])\}$ retornaria $1$;
+\item Para a expressão $2*\{3+4*(2+5[2+3])$ retornaria $0$;
+\end{itemize}
+
+\item Protótipo do método: \emph{verificaFechamento(char[] s)}
+
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Exemplo de uso}
+Verificação de expressões matemáticas: a estratégia é percorrer a
+expressão da esquerda para a direita:
+\begin{itemize}
+\item Se encontra $($, $[$ ou $\{$, empilha;
+\item Se encontra $)$, $]$ ou $\}$, desempilha e verifica o elemento no
+topo da pilha, que deve ser o caractere correspondente;
+\item Ao final, a pilha deve estar vazia.
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Exemplo de uso}
+\begin{figure}[H]
+\center
+\tiny
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ExemploUso.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Implementação de pilha com lista}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/PilhaLista.java}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/PilhaLista2.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Implementação de pilha com lista (push e pop)}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/PilhaLista3.java}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/PilhaLista3_1.java}
+\end{figure}
+
+\end{Slide}
+
+\begin{Slide}{Resumo - \emph{Pilha}}
+\begin{itemize}
+\item \emph{push}: insere novo elemento no topo da pilha 
+\item \emph{pop}: remove o elemento do topo da pilha
+\end{itemize}
+  \begin{center}
+    \includegraphics[width=1\textwidth]{figuras/fig1.pdf}
+  \end{center}
+\end{Slide}
+
+
+\begin{Slide}{Material de \textbf{consulta}}
+  \begin{itemize}
+  \item Capítulo 11 do livro: ``Introdução a Estruturas de Dados'' do
+    Waldemar Celes, Renato Cerqueira e José Lucas Rangel.
+  \end{itemize}
+\end{Slide}
+
+\begin{Slide}{Material de \textbf{referência}}
+  \begin{itemize}
+  \item Capítulo 11 do livro: ``Introdução a Estruturas de Dados'' do
+    Waldemar Celes, Renato Cerqueira e José Lucas Rangel.
+  \item Imagens retiradas do site da disciplina de Programação II da
+    PUC do Rio de
+    Janeiro. \href{http://www.inf.puc-rio.br/~inf1007/}{http://www.inf.puc-rio.br/~inf1007/}. 
+  \end{itemize}
+\end{Slide}
+
+\end{document}
+

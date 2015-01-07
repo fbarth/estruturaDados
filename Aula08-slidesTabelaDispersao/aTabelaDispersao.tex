@@ -1,0 +1,117 @@
+\documentclass[landscape,pdftex]{jomislides}
+
+\slidesmag{5} % escala, qto maior maiores serão as letras/figras/etc.
+
+%\centerslidesfalse
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{algorithmic}
+\usepackage{babel}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{alltt,fancyvrb,amssymb}
+\usepackage{listings}
+\usepackage{float,ctable}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+%
+% Slides
+% ======
+%
+
+\begin{document}
+
+%\input{autorHeaders}
+
+\title{Tabela de Dispersão} 
+\author{Fabrício J. Barth}
+\institution{BandTec - Faculdade de Tecnologia Bandeirantes}
+\date{Maio de 2012}
+
+\SlideHeader{}
+            {Disciplina de Estrutura de Dados e Armazenamento}
+\SlideFooter{\theslidepartheading $\;$ --- $\;$ \theslideheading}
+            {Faculdade de Tecnologia Bandeirantes \theslide}
+
+\vpagecolor[white]{white}
+\subtitle{}
+\maketitle
+
+
+\begin{Slide}{Objetivos da aula}
+Ao final da aula os alunos deverão ter conhecimento sobre:
+\begin{itemize}
+\item o que é uma tabela de dispersão;
+\item como implementar uma função \textit{hash}, e;
+\item quais são e como implementar as abordagens para tratamento de colisão. 
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Tópicos}
+  \begin{itemize}
+  \item Tabela de dispersão e função \textit{hash}.
+  \item Abordagens para tratamento de colisão:
+
+\begin{itemize}
+\item Uso da posição consecutiva livre, e;
+\item Uso de listas encadeadas.
+\end{itemize}
+
+  \end{itemize}
+\end{Slide}
+
+\begin{Slide}{Tabela de dispersão}
+Os objetivos de uma tabela de dispersão são:
+\begin{itemize}
+\item recuperar um elemento em tempo constante $O(1)$, e;
+\item armazenar o índice utilizando uma estrutura otimizada - que
+  ocupa pouco espaço.
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Exemplo de uso de tabela de dispersão}
+
+\textit{``... considere uma situação onde você deve desenvolver um
+  sistema que armazena informações sobre alunos. Cada registro de
+  aluno, além das informações sobre nome e email, também terá um
+  índice - que deverá facilitar a busca do registro... ``}
+
+\begin{itemize}
+\item Que estrutura utilizar para implementar o armazenamento e busca
+  dos registros de forma otimizada?
+
+\newpage
+
+\begin{itemize}
+\item Podemos utilizar um vetor de tamanho $N$ (que respeita a faixa
+  de valores do índice).
+\item Digamos que o índice tem 7 dígitos, então teríamos que ter um
+  vetor com 10 milhões de posições.
+\item Com $Aluno a = alunos[i]$ temos:
+
+\begin{itemize}
+\item um acesso rápido;
+\item mas pagamos um preço em uso de memória proibitivo.
+\end{itemize}
+
+\end{itemize}
+
+\end{itemize}
+\end{Slide}
+
+
+
+\begin{Slide}{Material de \textbf{consulta} e \textbf{referência}}
+  \begin{itemize}
+  \item Capítulo 18 do livro: ``Introdução a Estruturas de Dados'' do
+    Waldemar Celes, Renato Cerqueira e José Lucas Rangel.
+  \end{itemize}
+\end{Slide}
+
+\end{document}
+

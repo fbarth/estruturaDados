@@ -1,0 +1,309 @@
+\documentclass[landscape,pdftex]{jomislides}
+
+\slidesmag{5} % escala, qto maior maiores serão as letras/figras/etc.
+
+%\centerslidesfalse
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{algorithmic}
+\usepackage{babel}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{alltt,fancyvrb,amssymb}
+\usepackage{listings}
+\usepackage{float,ctable}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+%
+% Slides
+% ======
+%
+
+\begin{document}
+
+%\input{autorHeaders}
+
+\title{Busca} 
+\author{Fabrício J. Barth}
+\institution{BandTec - Faculdade de Tecnologia Bandeirantes}
+\date{Outubro de 2011}
+
+\SlideHeader{}
+            {Disciplina de Estrutura de Dados e Armazenamento}
+\SlideFooter{\theslidepartheading $\;$ --- $\;$ \theslideheading}
+            {Faculdade de Tecnologia Bandeirantes \theslide}
+
+\vpagecolor[white]{white}
+\subtitle{}
+\maketitle
+
+\begin{Slide}{Tópicos}
+  \begin{itemize}
+  \item Introdução e Objetivo.
+  \item Busca Sequencial.
+  \item Busca Binária.
+  \item Árvore Binária de Busca.
+  \end{itemize}
+\end{Slide}
+
+\begin{Slide}{Introdução e Objetivo}
+Discutir e implementar diferentes estratégias para efetuar a
+busca de um determinado elemento em um determinado conjunto de dados.   
+
+Dado um conjunto de dados, que pode ser armazenado em um vetor $v$ de
+tamanho $n$, que algoritmos utizar para encontrar um elemento $x$ de
+forma eficiente?
+
+\end{Slide}
+
+
+\begin{Slide}{Busca Sequencial}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Sequencial.java}
+\end{figure}
+\end{Slide}
+
+
+\begin{Slide}{Busca Sequencial}
+\begin{itemize}
+\item Algoritmo extremamente simples;
+\item Muito ineficiente quando o número de elementos no vetor for
+  muito grande.
+\item No pior caso, o algoritmo de busca sequencial precisa realizar
+  $n$ comparações para encontrar o elemento $x$.
+\item Portanto, o desempenho computacional desse algoritmo varia
+  \emph{linearmente} em relação ao tamanho do problema ($O(n)$). 
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Busca Binária}
+\begin{itemize}
+\item Considerando que o vetor $v$ já está ordenado, então pode-se
+  aplicar outra estratégia para busca um elemento $x$.
+\item Ua estratégia que particiona o vetor para realizar menos
+  comparações.
+\end{itemize}
+
+\newpage
+
+  \begin{center}
+    \includegraphics[width=.9\textwidth]{figuras/fig01.pdf}
+  \end{center}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Binaria.java}
+\end{figure}
+\end{Slide}
+
+
+\begin{Slide}{Análise do Algoritmo de Busca Binária}
+\begin{itemize}
+\item O desempenho deste algoritmo é muito superior ao de busca
+  sequencial\footnote{o pior caso caracteriza-se pela situação do
+    elemento que buscamos não estar no vetor.}.
+\item Quantas vezes precisamos repetir o procedimento de subdivisão
+  para concluir que o elemento não está presente no vetor?
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Implementação recursiva do Algoritmo de Busca Binária}
+O algoritmo de busca binária iterativo tem um desempenho superior a
+versão recursiva do mesmo algoritmo.
+
+Mesmo assim, vale a pena dar uma olhada na versão recursiva.
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/BinariaRecursiva.java}
+\end{figure}
+\end{Slide}
+
+
+\begin{Slide}{Busca em uma Lista Encadeada}
+\begin{itemize}
+\item Se tivermos os dados armazenados em uma lista encadeada, só
+  temos a alternativa de implementar um algoritmo de \emph{busca
+    linear}, mesmo se os elementos estiverem ordenados.
+\item Portanto, a lista encadeada não é uma boa opção para estruturar
+  nossos dados, se desejarmos realizar muitas operações de busca.
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Árvore Binária de Busca}
+Uma árvore binária de busca é uma estrutura de dados de árvore binária
+onde todos os nós da sub-árvore \emph{esquerda} possuem um valor
+numérico \emph{inferior} ao nó raiz e todos os nós da sub-árvore \emph{direita}
+possuem um valor \emph{superior} ao nó raiz. 
+
+\newpage
+
+\begin{figure}[htbp]
+\centering 
+\resizebox*{0.8\columnwidth}{0.8\textheight}
+{\includegraphics{figuras/fig02}}
+\caption{Exemplo de árvore binária de busca}
+\end{figure}
+\end{Slide}
+
+
+\begin{Slide}{Métodos de uma Árvore Binária de Busca}
+\begin{itemize}
+\item void imprimir(Nodo n);
+\item \emph{Nodo inserir(Nodo n, char c);}
+\item \emph{boolean procura(Nodo n, char c);}
+\item \emph{Nodo retirna(Nodo n, char c);}
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Imprimindo o conteúdo ordenado}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/PrintArvore.java}
+\end{figure}
+\end{Slide}
+
+
+\begin{Slide}{Buscando por conteúdo na árvore}
+\begin{figure}[htbp]
+\centering 
+\resizebox*{1\columnwidth}{0.7\textheight}
+{\includegraphics{figuras/fig03}}
+\end{figure}
+\end{Slide}
+
+
+\begin{Slide}{Buscando por conteúdo na árvore}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/SearchArvore.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Inserindo conteúdo na árvore}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/InsertArvore.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Estrutura de uma árvore binária de busca}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Arvore.java}
+\end{figure}
+\end{Slide}
+
+
+\begin{Slide}{Função que retira um elemento da árvore}
+\begin{itemize}
+\item Exclusão na folha.
+\item Exclusão de um nó com um filho.
+\item Exclusão de um nó com dois filhos.
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Exclusão na folha}
+\begin{figure}[htbp]
+\centering 
+\resizebox*{1\columnwidth}{0.7\textheight}
+{\includegraphics{figuras/fig04}}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Exclusão de um nó com um filho}
+\begin{figure}[htbp]
+\centering 
+\resizebox*{1\columnwidth}{0.4\textheight}
+{\includegraphics{figuras/fig05}}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Exclusão de um nó com dois filhos}
+\begin{figure}[htbp]
+\centering 
+\resizebox*{1\columnwidth}{0.55\textheight}
+{\includegraphics{figuras/fig06}}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Retirando um elemento da árvore}
+\begin{figure}[H]
+\center
+\tiny
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/RetiraElemento.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Retirando um elemento da árvore com dois filhos}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/RetiraElemento2.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Considerações Finais}
+Nesta aula foram vistos os seguintes algoritmos de busca:
+
+\begin{itemize}
+\item \textbf{Busca sequencial ou linear}:
+\begin{itemize}
+\item Método que consome \emph{muito} tempo para encontrar um elemento.
+\end{itemize}
+
+\item \textbf{Busca binária}:
+\begin{itemize}
+\item Método que consome \emph{pouco} tempo ao procurar por um elemento.
+\item No entanto, não pode ser utilizado em estruturas dinâmicas.
+\end{itemize}
+
+\newpage
+
+\item \textbf{Árvore de Busca Binária}:
+\begin{itemize}
+\item Método que pode ser utilizado no armazenamento ordenado e recuperação de
+  elementos em uma \emph{estrutura dinâmica};
+\item Consome \emph{pouco} tempo para procurar por um elemento.
+\end{itemize}
+\end{itemize}
+
+\end{Slide}
+
+
+\begin{Slide}{Material de \textbf{consulta} e \textbf{referência}}
+  \begin{itemize}
+  \item Capítulo 17 do livro: ``Introdução a Estruturas de Dados'' do
+    Waldemar Celes, Renato Cerqueira e José Lucas Rangel.
+  \item As imagens utilizadas nestes slides foram obtidas no site \href{http://pt.wikipedia.org/wiki/Arvore\_binaria\_de\_busca}{http://pt.wikipedia.org/wiki/Arvore\_binaria\_de\_busca}.
+  \end{itemize}
+\end{Slide}
+
+\end{document}
+

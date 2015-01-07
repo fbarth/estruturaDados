@@ -1,0 +1,219 @@
+\documentclass[landscape,pdftex]{jomislides}
+
+\slidesmag{5} % escala, qto maior maiores serÃƒÂ£o as letras/figras/etc.
+
+%\centerslidesfalse
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{algorithmic}
+\usepackage{babel}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{alltt,fancyvrb,amssymb}
+\usepackage{listings}
+\usepackage{float,ctable}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+%
+% Slides
+% ======
+%
+
+\begin{document}
+
+%\input{autorHeaders}
+
+\title{Algoritmos de ordenação} 
+\author{Fabrício J. Barth}
+\institution{BandTec - Faculdade de Tecnologia Bandeirantes}
+\date{Outubro de 2011}
+
+\SlideHeader{}
+            {Disciplina de Estrutura de Dados e Armazenamento}
+\SlideFooter{\theslidepartheading $\;$ --- $\;$ \theslideheading}
+            {Faculdade de Tecnologia Bandeirantes \theslide}
+
+\vpagecolor[white]{white}
+\subtitle{}
+\maketitle
+
+\begin{Slide}{Tópicos}
+  \begin{itemize}
+  \item Introdução e Justificativa.
+  \item Algoritmo de ordenação bolha.
+    \begin{itemize}
+    \item Iterativo
+    \item Recursivo
+    \end{itemize}
+  \item \textit{QuickSort}.
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Introdução e Justificativa}
+\begin{itemize}
+\item A \emph{entrada} é um vetor cujos elementos precisam ser ordenados.
+\item A \emph{saída} é o mesmo vetor com seus elementos na ordem especificada.
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Algoritmo de ordenação bolha}
+\begin{itemize}
+\item \textit{Os elementos maiores são mais leves e sobem como bolhas
+    até suas posições corretas.}
+\item Exemplo: ordenar $\{25, 48, 37, 12, 57, 86, 33, 92\}$
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Algoritmo de ordenação bolha (iterativo)}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/BolhaIterativo.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Algoritmo de ordenação bolha (c/ parada)}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/BolhaIterativoReturn.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Considerações sobre o desempenho do método bolha}
+\begin{itemize}
+\item Para ordenar um vetor, fazemos na primeira rodada $(n-1)$
+  comparações. Na segunda rodada fazemos $(n-2)$, até chegarmos em $1$
+  comparação.
+\item Tempo total gasto pelo algoritmo: $(n-1) + (n-2) + \cdots + 2 +
+  1 \simeq O(n^{2})$
+\end{itemize}
+
+\newpage
+
+\small
+Digamos que cada comparação dura 1ms (milissegundo). Sendo assim, temos:
+
+  \begin{center}
+    \includegraphics[width=.9\textwidth]{figuras/fig01.pdf}
+  \end{center}
+\end{Slide}
+
+\begin{Slide}{Algoritmo de ordenação bolha (recursivo)}
+
+O algoritmo recursivo de ordenação bolha posiciona o elemento de maior
+valor e chama, recursivamente, o algoritmo para ordenar o vetor
+restante, com $n-1$ elementos.
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/BolhaRecursivo.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Exemplo de utilização}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ExemploUtilizacao.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{QuickSort - \textit{Dividir para conquistar, com pivô!}}
+  \begin{center}
+    \includegraphics[width=.6\textwidth]{figuras/fig02.pdf}
+  \end{center}
+\end{Slide}
+
+\begin{Slide}{QuickSort}
+  \begin{algorithmic}
+	\STATE \textsc{QuickSort (A, p, r)} 
+	\IF {p $<$ r}
+        \STATE \textsc{q} = \textsc{Partition (A, p, r)}
+        \STATE \textsc{QuickSort (A, p, q-1)}
+        \STATE \textsc{QuickSort (A, q+1, r)}
+        \ENDIF
+  \end{algorithmic}
+
+Para ordenar um vetor $A$, a chamada inicial deve ser \textsc{QuickSort (A, 1, A.length)}.
+\end{Slide}
+
+\begin{Slide}{QuickSort - Partition}
+  \begin{algorithmic}
+	\STATE \textsc{Partition (A, p, r)}
+        \STATE x = A[r]
+        \STATE i = p - 1
+        \FOR {j = p \TO r - 1}
+            \IF {A[j] $\leq$ x}
+                 \STATE i = i + 1
+                 \STATE exchange A[i] with A[j]
+            \ENDIF
+        \ENDFOR
+        \STATE exchange A[i + 1] with A[r]
+	\RETURN i + 1
+  \end{algorithmic}
+\end{Slide}
+
+\begin{Slide}{QuickSort - implementação (1/3)}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/quickSort.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{QuickSort - implementação (2/3)}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/partition.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{QuickSort - implementação (3/3)}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/main.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{QuickSort - escolha do pivô}
+\begin{itemize}
+\item O pivô ideal é aquele que produz segmentos $P$ e $R$ com
+  tamanhos aproximadamente iguais: \emph{chave de valor mediado}. 
+\item A identificação do \emph{pivô ideal} requer a varredura de todo
+  o vetor (o benefício não justifica o custo).
+\item Deseja-se um critério de escolha \emph{simples} e \emph{rápido}.
+\item Sem conhecimento prévio sobre a distribuição de valores das
+  chaves, supõe-se que qualquer um possa ser o pivô e arbitra-se, por
+  exemplo, a \emph{primeira chave}. 
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Material de \textbf{consulta} e \textbf{referência}}
+  \begin{itemize}
+  \item Capítulo 16 do livro: ``Introdução a Estruturas de Dados'' do
+    Waldemar Celes, Renato Cerqueira e José Lucas Rangel.
+  \item Capítulo 7 do livro: ``Introduction to Algorithms'' do Cormen,
+    Leiserson, Rivest e Stein.
+  \item Algumas imagens foram obtidas no site
+    \href{http://learnyousomeerlang.com/recursion}{http://learnyousomeerlang.com/recursion}.  
+  \end{itemize}
+\end{Slide}
+
+\end{document}

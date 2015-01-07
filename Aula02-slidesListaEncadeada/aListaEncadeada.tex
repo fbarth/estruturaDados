@@ -1,0 +1,455 @@
+\documentclass[landscape,pdftex]{jomislides}
+
+\slidesmag{5} % escala, qto maior maiores serão as letras/figras/etc.
+
+%\centerslidesfalse
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{algorithmic}
+\usepackage{babel}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{alltt,fancyvrb,amssymb}
+\usepackage{listings}
+\usepackage{float,ctable}
+\usepackage{hyperref}
+
+%
+% Slides
+% ======
+%
+
+
+\begin{document}
+
+%\input{autorHeaders}
+
+\title{Listas Encadeadas} 
+\author{Fabrício J. Barth}
+\institution{BandTec - Faculdade de Tecnologia Bandeirantes}
+\date{Fevereiro de 2011}
+
+\SlideHeader{}
+            {Disciplina de Estrutura de Dados e Armazenamento}
+\SlideFooter{\theslidepartheading $\;$ --- $\;$ \theslideheading}
+            {Faculdade de Tecnologia Bandeirantes \theslide}
+
+\vpagecolor[white]{white}
+
+
+\subtitle{}
+
+\maketitle
+
+\begin{Slide}{Tópicos Principais}
+  \begin{itemize}
+  \item Motivação
+  \item Listas encadeadas
+  \item Implementações recursivas
+  \item Listas de tipos estruturados
+  \end{itemize}
+\end{Slide}
+
+\begin{Slide}{Tópicos complementares}
+  \begin{itemize}
+  \item Listas circulares
+  \item Listas duplamente encadeadas
+  \end{itemize}
+\end{Slide}
+
+\begin{PartSlide}{Tópicos Principais}
+\end{PartSlide}
+
+\begin{Slide}{Motivação}
+  \begin{itemize}
+  \item Vetor:
+
+    \begin{itemize}
+      \item ocupa um espaço contíguo de memória
+      \item permite acesso randômico aos elementos
+      \item deve ser dimensionado com um número máximo de elementos
+    \end{itemize}
+  \end{itemize}
+
+  \begin{center}
+    \includegraphics[width=.9\textwidth]{figuras/fig-01.pdf}
+  \end{center}
+\end{Slide}
+
+
+\begin{Slide}{Motivação}
+\begin{itemize}
+\item Estruturas de dados dinâmicas: crescem ou decrescem à medida que
+  elementos são inseridos ou removidos.
+\item Exemplo: \emph{listas encadeadas}.
+\item Listas encadeadas são amplamentes utilizadas para implementar
+  outras estruturas de dados.
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Listas Encadeadas}
+  \begin{center}
+    \includegraphics[width=1\textwidth]{figuras/fig-02.pdf}
+  \end{center}
+
+\begin{itemize}
+\item sequência encadeada de elementos, chamados \emph{nós} da lista.
+\item \emph{nó da lista} é representado por dois campos:
+
+\begin{itemize}
+\item a informação armazenada e
+\item o ponteiro para o próximo elemento da lista
+\end{itemize}
+
+\newpage
+
+\item a lista é representada por um ponteiro para o primeiro nó
+\item o ponteiro do último elemento é NULL.
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Estrutura com ponteiro para ela mesma}
+\begin{figure}[H]
+\center
+\tiny
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Nodo.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Criação da lista vazia}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ListaCria.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Listas encadeadas de inteiros: inserção}
+\begin{center}
+\includegraphics[width=.9\textwidth]{figuras/fig-03.pdf}
+\end{center}
+
+\begin{itemize}
+\item Aloca memória para armazenar o elemento
+\item Encadeia o elemento na lista existente
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Listas encadeadas de inteiros: inserção}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ListaInseri.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Exemplo de utilização}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Main1.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Função que percorre os elementos da lista}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ListaImprime.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Exemplo de utilização}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Main2.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Função que verifica se a lista está vazia}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/IsEmpty.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Função de busca}
+\begin{itemize}
+\item Recebe a informação referente ao elemento a pesquisar
+\item Retornar o objeto da lista que representa o elemento ou null,
+  caso o elemento não seja encontrado na lista.
+\end{itemize}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Search.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Exemplo de utilização da função de busca}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Main3.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Função que retira um elemento da lista}
+
+\begin{itemize}
+\item Recebe como entrada o valor do elemento a retirar.
+\item Atualiza o valor do ponteiro para a lista ($prim$) se o elemento
+  removido for o primeiro.
+
+  \begin{center}
+    \includegraphics[width=.9\textwidth]{figuras/fig-04.pdf}
+  \end{center}
+
+\newpage
+
+\item caso contrário, remove apenas o elemento da lista.
+\end{itemize}
+
+  \begin{center}
+    \includegraphics[width=.9\textwidth]{figuras/fig-05.pdf}
+  \end{center}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\tiny
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Retira.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Função para liberar a lista}
+\begin{figure}[H]
+\center
+\tiny
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Free.java}
+\end{figure}
+
+\begin{itemize}
+\item Em Java, quando um objeto não é mais utilizado, a JVM é
+  responsável por desalocar a memória que não é mais utilizada.
+\item No entanto, em outras linguagens de programação o programador
+  deve explicitamente liberar a memória consumida pela variável
+  desnecessária. 
+\end{itemize}
+\end{Slide}
+
+
+\begin{Slide}{Manutenção da lista ordenada}
+Função de inserção percorre os elementos da lista até encontrar a
+posição correta para a inserção do novo.
+  \begin{center}
+    \includegraphics[width=.9\textwidth]{figuras/fig-06.pdf}
+  \end{center}
+
+\newpage
+
+\begin{figure}[H]
+\center
+\tiny
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/Ordenado.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Definição recursiva de lista}
+Uma lista é:
+\begin{itemize}
+\item uma lista vazia, ou;
+\item um elemento seguido de uma (sub-)lista.
+\end{itemize}
+  \begin{center}
+    \includegraphics[width=.9\textwidth]{figuras/fig-07.pdf}
+  \end{center}
+\end{Slide}
+
+\begin{Slide}{Exemplo: função recursiva para imprimir uma lista}
+\begin{itemize}
+\item se a lista for vazia, não imprima nada
+\item caso contrário,
+\begin{itemize}
+\item imprima a informação associada ao primeiro nó, dada por $prim.getInfo()$ 
+\item imprima a sub-lista, dada por $prim.getProx()$, chamando recursivamente a função.
+\end{itemize}
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Função imprime recursiva}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/PrintRecursivo.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Função imprime recursiva invertida}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/PrintRecursivoInvertido.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Exemplo: função para retirar um elemento da lista}
+\begin{itemize}
+\item retire o elemento, se ele for o primeiro da lista (ou da sub-lista)
+\item caso contrário, chame a função recursivamente para retirar o
+  elemento da sub-lista
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Função retira elemento recursiva}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/RetiraRecursivo.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Igualdade de listas}
+\emph{boolean listasIguais(Nodo l1, Nodo l2)}
+
+Implementação não recursiva:
+
+\begin{itemize}
+\item percorre as duas listas usando dois ponteiros auxiliares:
+\begin{itemize} 
+\item se duas informações forem diferentes então as listas são diferentes.
+\end{itemize}
+\item ao terminar uma das listas ou as duas:
+\begin{itemize}
+\item se os dois ponteiros auxiliares são NULL então as duas listas
+  tem o mesmo número de elementos e são iguais.
+\end{itemize}
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Listas iguais: não recursiva}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ListasIguais.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Igualdade de listas}
+\emph{boolean listasIguais(Nodo l1, Nodo l2)}
+
+Implementação recursiva:
+
+\begin{itemize}
+\item se as duas listas dadas são vazias então são iguais
+\item se não forem ambas vazias, mas uma delas é vazia, então são
+  diferentes
+\item se ambas não forem vazias, teste:
+\begin{itemize}
+\item se informações associadas aos primeiros nós são iguais e
+\item se as sub-listas são iguais.
+\end{itemize}
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Listas iguais: recursiva}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ListaIguaisRecursiva.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Listas de tipos estruturados}
+Lista de tipo estruturado:
+\begin{itemize}
+\item a informação associada a cada nó de uma lista encadeada pode ser
+  mais complexa, sem alterar o encadeamento dos elementos;
+\item as funções apresentadas para manipular listas de inteiros podem
+  ser adaptadas para tratar listas de outros tipos.
+
+\newpage
+
+\item o campo da informação pode ser representado por um objeto para
+  uma estrutura, em lugar da estrutura em si.
+\item independente da informação armazenada na lista, a estrutura do
+  nó é sempre composta por: 
+\begin{itemize}
+\item um objeto para a informação e
+\item um objeto para o próximo nó da lista.
+\end{itemize}
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Listas de tipos estruturados}
+\begin{figure}[H]
+\center
+\small
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ListasTiposEstruturados.java}
+\end{figure}
+\end{Slide}
+
+\begin{Slide}{Listas heterogêneas}
+\begin{figure}[H]
+\center
+\tiny
+\VerbatimInput
+[xleftmargin=5mm,numbers=left,obeytabs=true]{codigo/ListasHeterogeneas.java}
+\end{figure}
+\end{Slide}
+
+\begin{PartSlide}{Tópicos Complementares}
+\end{PartSlide}
+
+\begin{Slide}{Tópicos Complementares}
+\begin{itemize}
+\item Listas Circulares
+\item Listas Duplamente Encadeadas
+\end{itemize}
+\end{Slide}
+
+\begin{Slide}{Material de \textbf{consulta}}
+  \begin{itemize}
+  \item Capítulo 10 do livro: ``Introdução a Estruturas de Dados'' do
+    Waldemar Celes, Renato Cerqueira e José Lucas Rangel.
+  \end{itemize}
+\end{Slide}
+
+\begin{Slide}{Material de \textbf{referência}}
+  \begin{itemize}
+  \item Capítulo 10 do livro: ``Introdução a Estruturas de Dados'' do
+    Waldemar Celes, Renato Cerqueira e José Lucas Rangel.
+  \item Imagens retiradas do site da disciplina de Programação II da
+    PUC do Rio de
+    Janeiro. \href{http://www.inf.puc-rio.br/~inf1007/}{http://www.inf.puc-rio.br/~inf1007/}. 
+  \end{itemize}
+\end{Slide}
+
+\end{document}
+
